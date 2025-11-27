@@ -5,140 +5,609 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roberto Carlos Tientcheu - Portfolio Certifications</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; }
-        h1 { color: #2C3E50; border-bottom: 2px solid #3498DB; padding-bottom: 10px; }
-        h2 { color: #34495E; margin-top: 30px; border-left: 5px solid #E67E22; padding-left: 10px; }
-        .cert-item { margin-bottom: 20px; padding: 15px; border: 1px solid #ECF0F1; border-radius: 5px; }
-        .cert-title { font-weight: bold; color: #2980B9; font-size: 1.1em; }
-        .platform { font-style: italic; color: #7F8C8D; }
-        .skills-list { margin-top: 5px; font-size: 0.9em; line-height: 1.4; }
-        .attestation-link { color: #E67E22; text-decoration: none; font-weight: bold; }
-        .attestation-link:hover { text-decoration: underline; }
+        /* CSS V4 - Expérience Utilisateur et Design Épuré */
+        :root {
+            --color-background: #F8F8F8; /* Blanc cassé */
+            --color-card-bg: white;
+            --color-accent: #007AFF; /* Bleu Apple vif pour l'interactivité */
+            --color-soft-accent: #EAEAEA; /* Gris de bordure très clair */
+            --color-tag-bg: #F0F0F5; /* Fond de tag très léger */
+            --color-text-dark: #1D1D1F;
+            --color-text-subtle: #6E6E73;
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            background-color: var(--color-background);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: var(--color-text-dark);
+            -webkit-font-smoothing: antialiased; /* Meilleur rendu des polices */
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--color-card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); /* Ombre douce */
+        }
+
+        /* En-tête */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px 0;
+        }
+        
+        #lang-toggle {
+            cursor: pointer;
+            padding: 8px 12px;
+            border: 1px solid var(--color-soft-accent);
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--color-text-subtle);
+            transition: all 0.2s;
+            background-color: white;
+        }
+
+        .hero {
+            padding: 30px 30px 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.8px;
+        }
+
+        /* Contenu Principal */
+        .content {
+            padding: 0 50px 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            padding-left: 5px;
+        }
+
+        .section-icon {
+            font-size: 2em;
+            opacity: 0.8;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .section-description {
+            color: var(--color-text-subtle);
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            max-width: 900px;
+        }
+
+        /* Cartes de Certification (UX/UI Amélioré) */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px 25px;
+        }
+
+        .cert-card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-soft-accent);
+            border-radius: 12px;
+            padding: 25px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02); /* Ombre plus subtile */
+        }
+
+        .cert-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-color: #D3D3D3;
+            transform: translateY(-3px); /* Petite animation */
+        }
+
+        .cert-title {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .platform {
+            color: var(--color-text-subtle);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .skills-title {
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background-color: var(--color-tag-bg);
+            color: var(--color-text-dark);
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .skill-tag:hover {
+            background-color: #E2E2E7; /* Légère couleur au survol */
+        }
+
+        /* Lien d'Attestation (Bouton) */
+        .attestation-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--color-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: background-color 0.2s, opacity 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 113, 227, 0.2); /* Ombre bleue subtile */
+        }
+
+        .attestation-link:hover {
+            background-color: #005BBF;
+            opacity: 0.95;
+            box-shadow: 0 6px 15px rgba(0, 113, 227, 0.3);
+        }
+        
+        /* Pied de Page */
+        .footer-links {
+            padding: 30px 50px;
+            text-align: center;
+            border-top: 1px solid #EAEAEA;
+            font-size: 0.95em;
+        }
+
+        .footer-links a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 15px;
+            transition: color 0.2s;
+        }
+
+        @media (max-width: 900px) {
+            .content { padding: 0 30px 40px; }
+            .cert-grid { grid-template-columns: 1fr; }
+            .footer-links { padding: 20px 30px; }
+        }
     </style>
 </head>
 <body>
+    <div class="container" data-current-lang="fr">
+        <div class="header-top">
+            <div style="width: 100px;"></div> <!-- Espaceur -->
+            <button id="lang-toggle" data-fr="English" data-en="Français">English</button>
+        </div>
+        
+        <!-- Contenu de l'En-tête -->
+        <div class="hero">
+            <h1>Roberto Carlos Tientcheu</h1>
+            <p class="hero-subtitle" data-fr="Portfolio Certifications & Spécialisations Professionnelles" data-en="Certifications & Professional Specializations Portfolio"></p>
+        </div>
 
-    <h1>Portfolio Certifications & Badges Vérifiés</h1>
-    <p>Cette page présente les certifications et spécialisations professionnelles obtenues sur les plateformes e-learning, attestant d'une expertise technique et fonctionnelle ciblée, alignée sur les besoins du marché (Data, Supply Chain, ERP).</p>
+        <div class="content">
+            <!-- Section 1 : Data & Business Intelligence -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon"> </span>
+                    <h2 data-fr="1. Data & Business Intelligence (BI)" data-en="1. Data & Business Intelligence (BI)"></h2>
+                </div>
+                <p class="section-description" data-fr="Expertise complète en analyse de données, modélisation, visualisation et programmation, couvrant l'intégralité du cycle de vie de la donnée." data-en="Complete expertise in data analysis, modeling, visualization, and programming, covering the entire data lifecycle."></p>
+                
+                <div class="cert-grid">
+                    <!-- CERTIF 1.1 : Microsoft Power BI -->
+                    <div class="cert-card">
+                        <div class="cert-title">Microsoft Power BI Data Analyst</div>
+                        <div class="platform" data-fr="Coursera • Microsoft | Obtenue le : 8 déc. 2024" data-en="Coursera • Microsoft | Completed : Dec 8, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">Power BI</span>
+                                <span class="skill-tag" data-fr="Modélisation de Données" data-en="Data Modeling"></span>
+                                <span class="skill-tag">ETL</span>
+                                <span class="skill-tag">DAX</span>
+                                <span class="skill-tag">Business Intelligence</span>
+                                <span class="skill-tag">PL-300 Exam Prep</span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/14a11cd1f1d3d86c9c66cd08fda72eb9" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 1.2 : Tableau BI Analyst -->
+                    <div class="cert-card">
+                        <div class="cert-title">Tableau Business Intelligence Analyst</div>
+                        <div class="platform" data-fr="Coursera • Tableau Learning Partner | Obtenue le : 8 déc. 2024" data-en="Coursera • Tableau Learning Partner | Completed : Dec 8, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">Tableau Software</span>
+                                <span class="skill-tag" data-fr="Visualisation de Données" data-en="Data Visualization"></span>
+                                <span class="skill-tag">Data Storytelling</span>
+                                <span class="skill-tag" data-fr="Analyse Commerciale" data-en="Business Analysis"></span>
+                                <span class="skill-tag">Data Management</span>
+                                <span class="skill-tag">ETL</span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/06732acfaa6e3155ab64de30c9901a90" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 1.3 : Google Data Analytics -->
+                    <div class="cert-card">
+                        <div class="cert-title">Google Data Analytics</div>
+                        <div class="platform" data-fr="Coursera • Google | Obtenue le : 6 déc. 2024" data-en="Coursera • Google | Completed : Dec 6, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">R Programming</span>
+                                <span class="skill-tag" data-fr="Nettoyage de Données" data-en="Data Cleaning"></span>
+                                <span class="skill-tag" data-fr="Analyse Statistique" data-en="Statistical Analysis"></span>
+                                <span class="skill-tag" data-fr="Feuilles de Calcul" data-en="Spreadsheet Software"></span>
+                                <span class="skill-tag">Tableau</span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/1ab765699328965e706532d60cbcc74b" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 1.4 : IBM Data Analytics with Excel and R -->
+                    <div class="cert-card">
+                        <div class="cert-title">IBM Data Analytics with Excel and R</div>
+                        <div class="platform" data-fr="Coursera • IBM | Obtenue le : 6 déc. 2024" data-en="Coursera • IBM | Completed : Dec 6, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">R Programming</span>
+                                <span class="skill-tag" data-fr="Analyse Statistique" data-en="Statistical Analysis"></span>
+                                <span class="skill-tag">IBM Cognos Analytics</span>
+                                <span class="skill-tag" data-fr="Bases de Données Relationnelles" data-en="Relational Databases"></span>
+                                <span class="skill-tag">Microsoft Excel</span>
+                                <span class="skill-tag" data-fr="Data Wrangling" data-en="Data Wrangling"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/f7f50b959f37339f1d365ab9c48d33a5" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 1.5 : VBA OpenClassrooms -->
+                    <div class="cert-card">
+                        <div class="cert-title" data-fr="Analyser vos données avec VBA" data-en="Analyze Your Data with VBA"></div>
+                        <div class="platform" data-fr="OpenClassrooms | Obtenue le : 8 juin 2024" data-en="OpenClassrooms | Completed : June 8, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">VBA</span>
+                                <span class="skill-tag" data-fr="Automatisation de Reporting" data-en="Reporting Automation"></span>
+                                <span class="skill-tag" data-fr="Régression Linéaire" data-en="Linear Regression"></span>
+                                <span class="skill-tag" data-fr="Modélisation Statistique" data-en="Statistical Modeling"></span>
+                                <span class="skill-tag" data-fr="Excel" data-en="Excel"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://openclassrooms.com/fr/course-certificates/8288346971" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                </div>
+            </div>
 
-    <h2>1. Data & Business Intelligence (BI) 📊</h2>
-    <p>Expertise complète en **analyse de données**, **modélisation**, **visualisation** et **programmation**, couvrant l'intégralité du cycle de vie de la donnée.</p>
+            <!-- Section 2 : Supply Chain & S&OP -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">⚙️</span>
+                    <h2 data-fr="2. Supply Chain Management & Sales Operations" data-en="2. Supply Chain Management & Sales Operations"></h2>
+                </div>
+                <p class="section-description" data-fr="Expertise en Supply Chain Analytics, planification de la demande (Forecasting) et maîtrise des processus de Sales Operations (S&OP)." data-en="Expertise in Supply Chain Analytics, demand planning (Forecasting), and mastery of Sales Operations processes (S&OP)."></p>
+                
+                <div class="cert-grid">
+                    <!-- CERTIF 2.1 : Unilever SC Data Analyst -->
+                    <div class="cert-card">
+                        <div class="cert-title">Unilever Supply Chain Data Analyst</div>
+                        <div class="platform" data-fr="Coursera • Unilever | Obtenue le : 9 déc. 2024" data-en="Coursera • Unilever | Completed : Dec 9, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Planification de la Demande" data-en="Demand Planning"></span>
+                                <span class="skill-tag">Forecasting</span>
+                                <span class="skill-tag" data-fr="Supply Chain Analytics" data-en="Supply Chain Analytics"></span>
+                                <span class="skill-tag" data-fr="Process Improvement" data-en="Process Improvement"></span>
+                                <span class="skill-tag" data-fr="Analyse Prédictive" data-en="Predictive Analytics"></span>
+                                <span class="skill-tag" data-fr="Real Time Data" data-en="Real Time Data"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/cc3808f62a6d46e779cfaa17f2fffee4" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+
+                    <!-- CERTIF 2.2 : Pilotez votre Reverse Supply Chain (OpenClassrooms) -->
+                    <div class="cert-card">
+                        <div class="cert-title" data-fr="Pilotez votre Reverse Supply Chain" data-en="Manage Your Reverse Supply Chain"></div>
+                        <div class="platform" data-fr="OpenClassrooms | Obtenue le : 7 juin 2024" data-en="OpenClassrooms | Completed : June 7, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Reverse Logistics" data-en="Reverse Logistics"></span>
+                                <span class="skill-tag" data-fr="Circular Economy" data-en="Circular Economy"></span>
+                                <span class="skill-tag" data-fr="Gestion des Retours" data-en="Returns Management"></span>
+                                <span class="skill-tag" data-fr="Optimisation des Flux" data-en="Flow Optimization"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://openclassrooms.com/fr/course-certificates/9158988687" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 2.3 : Salesforce Sales Operations -->
+                    <div class="cert-card">
+                        <div class="cert-title">Salesforce Sales Operations</div>
+                        <div class="platform" data-fr="Coursera • Salesforce & Pathstream | Obtenue le : 21 déc. 2024" data-en="Coursera • Salesforce & Pathstream | Completed : Dec 21, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Sales Operations" data-en="Sales Operations"></span>
+                                <span class="skill-tag">CRM (Salesforce)</span>
+                                <span class="skill-tag" data-fr="Order Management" data-en="Order Management"></span>
+                                <span class="skill-tag" data-fr="Reporting & Dashboards" data-en="Reporting & Dashboards"></span>
+                                <span class="skill-tag" data-fr="Lead Management" data-en="Lead Management"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/c4644a5d8ecd2ad67e4889047652d38b" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 : ERP (SAP) & Systèmes d'Entreprise -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon"> </span>
+                    <h2 data-fr="3. ERP (SAP) & Systèmes d'Entreprise" data-en="3. ERP (SAP) & Enterprise Systems"></h2>
+                </div>
+                <p class="section-description" data-fr="Compréhension des environnements de systèmes intégrés (ERP), des architectures d'entreprise et des fondations professionnelles SAP." data-en="Understanding of integrated systems environments (ERP), enterprise architectures, and professional SAP fundamentals."></p>
+
+                <div class="cert-grid">
+                    <!-- CERTIF 3.1 : SAP Professional Fundamentals -->
+                    <div class="cert-card">
+                        <div class="cert-title">SAP Professional Fundamentals</div>
+                        <div class="platform" data-fr="Coursera • SAP | Obtenu le : 20 déc. 2024" data-en="Coursera • SAP | Completed : Dec 20, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">ERP (SAP)</span>
+                                <span class="skill-tag" data-fr="Consulting Management" data-en="Management Consulting"></span>
+                                <span class="skill-tag" data-fr="Solution Delivery" data-en="Solution Delivery"></span>
+                                <span class="skill-tag" data-fr="Implementation de Projet" data-en="Project Implementation"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/e43c3ff2c54ca063732851f778bea67a" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 3.2 : Understanding the Enterprise Systems Environment -->
+                    <div class="cert-card">
+                        <div class="cert-title">Understanding the Enterprise Systems Environment</div>
+                        <div class="platform" data-fr="Coursera • SAP | Obtenu le : 5 janv. 2025" data-en="Coursera • SAP | Completed : Jan 5, 2025"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Processus d'Affaires" data-en="Business Processes"></span>
+                                <span class="skill-tag" data-fr="Enterprise Architecture" data-en="Enterprise Architecture"></span>
+                                <span class="skill-tag" data-fr="Automatisation des Processus" data-en="Process Automation"></span>
+                                <span class="skill-tag" data-fr="Cloud Computing" data-en="Cloud Computing"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/19654470f7e75c88af273c137c536859" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 4 : Gestion de Projet & Excellence Opérationnelle -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon"> </span>
+                    <h2 data-fr="4. Gestion de Projet & Excellence Opérationnelle" data-en="4. Project Management & Operational Excellence"></h2>
+                </div>
+                <p class="section-description" data-fr="Maîtrise des méthodologies de gestion de projet (Agile/Scrum) et de la gestion de programmes (PgMP), fondamentales pour l'implémentation de solutions Supply Chain." data-en="Mastery of project management methodologies (Agile/Scrum) and program management (PgMP), essential for implementing Supply Chain solutions."></p>
+
+                <div class="cert-grid">
+                    <!-- CERTIF 4.1 : Google Project Management -->
+                    <div class="cert-card">
+                        <div class="cert-title">Google Project Management</div>
+                        <div class="platform" data-fr="Coursera • Google | Obtenue le : 6 déc. 2024" data-en="Coursera • Google | Completed : Dec 6, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag">Agile / Scrum</span>
+                                <span class="skill-tag" data-fr="Gestion des Risques" data-en="Risk Management"></span>
+                                <span class="skill-tag" data-fr="Gestion de Projet" data-en="Project Management"></span>
+                                <span class="skill-tag" data-fr="Communication Stratégique" data-en="Strategic Communication"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/3c4fae5cc53488b1d0ada3291518adf7" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                    
+                    <!-- CERTIF 4.2 : IBM Program Manager -->
+                    <div class="cert-card">
+                        <div class="cert-title">IBM Program Manager</div>
+                        <div class="platform" data-fr="Coursera • IBM & SkillUp | Obtenue le : 6 déc. 2024" data-en="Coursera • IBM & SkillUp | Completed : Dec 6, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Gestion de Programme (PgMP)" data-en="Program Management (PgMP)"></span>
+                                <span class="skill-tag" data-fr="Change Management" data-en="Change Management"></span>
+                                <span class="skill-tag" data-fr="Stratégie Organisationnelle" data-en="Organizational Strategy"></span>
+                                <span class="skill-tag" data-fr="EVM (Earned Value Management)" data-en="EVM (Earned Value Management)"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="https://coursera.org/share/d11dcee8ca819ab84d82f54ee24c17b1" target="_blank" data-fr="Voir l'attestation" data-en="View Certificate"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5 : Environnement, Durabilité & RSE -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🌱</span>
+                    <h2 data-fr="5. Environnement, Durabilité & RSE" data-en="5. Environment, Sustainability & CSR"></h2>
+                </div>
+                <p class="section-description" data-fr="Expertise des enjeux climatiques et du développement durable, permettant l'intégration de la RSE et de l'économie circulaire dans la chaîne de valeur (Formations UN CC:Learn et EdX)." data-en="Expertise in climate issues and sustainable development, enabling the integration of CSR and the circular economy into the value chain (UN CC:Learn and EdX training)."></p>
+
+                <div class="cert-grid">
+                    <!-- CERTIF 5.1 : Introduction à l'Économie Verte -->
+                    <div class="cert-card">
+                        <div class="cert-title" data-fr="Introduction à l'Économie Verte" data-en="Introduction to Green Economy"></div>
+                        <div class="platform" data-fr="EdX (Via Attestation de Réussite) | Obtenue le : 28 juil. 2024" data-en="EdX (Via Attestation of Completion) | Completed : July 28, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Économie Circulaire" data-en="Circular Economy"></span>
+                                <span class="skill-tag" data-fr="Développement Durable" data-en="Sustainable Development"></span>
+                                <span class="skill-tag" data-fr="Politiques Vertes" data-en="Green Policies"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="#" target="_blank" data-fr="Attestation (Code AJRCxD3ZNz)" data-en="Certificate (Code AJRCxD3ZNz)"></a>
+                    </div>
+                    
+                    <!-- CERTIF 5.2 : Net Zero 101 -->
+                    <div class="cert-card">
+                        <div class="cert-title">Net Zero 101: What, Why and How</div>
+                        <div class="platform" data-fr="UN CC:Learn | Obtenu le : 1 août 2024" data-en="UN CC:Learn | Completed : Aug 1, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Stratégie Net Zéro" data-en="Net Zero Strategy"></span>
+                                <span class="skill-tag" data-fr="Atténuation du Changement Climatique" data-en="Climate Change Mitigation"></span>
+                                <span class="skill-tag" data-fr="Reporting ESG" data-en="ESG Reporting"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="#" target="_blank" data-fr="Attestation (Code ly63Xh3gzl)" data-en="Certificate (Code ly63Xh3gzl)"></a>
+                    </div>
+
+                    <!-- CERTIF 5.3 : Advancing Sustainable Development in Practice -->
+                    <div class="cert-card">
+                        <div class="cert-title">Advancing Sustainable Development in Practice</div>
+                        <div class="platform" data-fr="UN CC:Learn | Obtenu le : 28 juil. 2024" data-en="UN CC:Learn | Completed : July 28, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Objectifs de Développement Durable (ODD)" data-en="Sustainable Development Goals (SDGs)"></span>
+                                <span class="skill-tag" data-fr="Mise en Œuvre Pratique" data-en="Practical Implementation"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="#" target="_blank" data-fr="Attestation (Code 772VL4KPpP)" data-en="Certificate (Code 772VL4KPpP)"></a>
+                    </div>
+
+                    <!-- CERTIF 5.4 : Climate Change, Peace and Security -->
+                    <div class="cert-card">
+                        <div class="cert-title">Climate Change, Peace and Security</div>
+                        <div class="platform" data-fr="UN CC:Learn | Obtenu le : 14 août 2024" data-en="UN CC:Learn | Completed : Aug 14, 2024"></div>
+                        <div class="skills-section">
+                            <div class="skills-title" data-fr="Compétences clés" data-en="Key Skills"></div>
+                            <div class="skills-grid">
+                                <span class="skill-tag" data-fr="Risques de Sécurité Climatiques" data-en="Climate-Related Security Risks"></span>
+                                <span class="skill-tag" data-fr="Approche Intégrée" data-en="Integrated Approach"></span>
+                            </div>
+                        </div>
+                        <a class="attestation-link" href="#" target="_blank" data-fr="Attestation (Code TI9ykF8gAo)" data-en="Certificate (Code TI9ykF8gAo)"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pied de Page (Liens vers d'autres ressources) -->
+        <div class="footer-links">
+            <p style="text-align: center; margin-top: 5px;">
+                <a href="https://carlos25-afq.github.io/roberto-portfolio/fr.html" id="link-cv">Retour au CV Détaillé</a> |
+                <a href="https://github.com/Carlos25-afq?tab=repositories" id="link-github">Explorer les Projets GitHub</a>
+            </p>
+        </div>
+    </div>
     
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : Microsoft Power BI Data Analyst</div>
-        <div class="platform">Plateforme : Coursera, par Microsoft | Obtenue le : 8 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **Power BI**, Modélisation de Données, **ETL** (Extract, Transform, Load), **Data Manipulation**, **DAX**, **Business Intelligence**, Microsoft Power Platform, Préparation Examen **PL-300**.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/14a11cd1f1d3d86c9c66cd08fda72eb9" target="_blank">Voir l'attestation</a>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            const toggleButton = document.getElementById('lang-toggle');
+            
+            // État initial (Lecture depuis l'attribut du conteneur)
+            let currentLang = container.getAttribute('data-current-lang') || 'fr';
 
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : Tableau Business Intelligence Analyst</div>
-        <div class="platform">Plateforme : Coursera, par Tableau Learning Partner | Obtenue le : 8 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **Tableau Software**, **Data Visualization**, **Data Storytelling**, **Business Analysis**, **Business Metrics**, **Data Management**, ETL, Data Warehousing, Data Literacy.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/06732acfaa6e3155ab64de30c9901a90" target="_blank">Voir l'attestation</a>
-    </div>
+            const translations = {
+                fr: {
+                    'lang-toggle': 'English',
+                    'link-cv': 'Retour au CV Détaillé',
+                    'link-github': 'Explorer les Projets GitHub'
+                },
+                en: {
+                    'lang-toggle': 'Français',
+                    'link-cv': 'Back to Detailed CV',
+                    'link-github': 'Explore GitHub Projects'
+                }
+            };
+            
+            function updateContent(lang) {
+                // Met à jour la langue du conteneur
+                container.setAttribute('data-current-lang', lang);
+                
+                // Met à jour le texte du bouton de toggle
+                toggleButton.textContent = translations[lang]['lang-toggle'];
+                
+                // Met à jour les éléments avec data-fr/data-en
+                document.querySelectorAll('[data-fr], [data-en]').forEach(el => {
+                    const content = el.getAttribute(`data-${lang}`);
+                    if (content) {
+                        if (el.tagName === 'A') {
+                            el.textContent = content;
+                        } else {
+                            el.innerHTML = content;
+                        }
+                    }
+                });
+                
+                // Mise à jour des liens du footer (texte uniquement)
+                document.getElementById('link-cv').textContent = translations[lang]['link-cv'];
+                document.getElementById('link-github').textContent = translations[lang]['link-github'];
+            }
 
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : Google Data Analytics</div>
-        <div class="platform">Plateforme : Coursera, par Google | Obtenue le : 6 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **SQL**, **R Programming**, **Spreadsheet Software** (Feuilles de calcul), **Data Cleaning**, **Data Processing**, **Tableau**, Analyse de Données, Data Validation.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/1ab765699328965e706532d60cbcc74b" target="_blank">Voir l'attestation</a>
-    </div>
-    
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : IBM Data Analytics with Excel and R</div>
-        <div class="platform">Plateforme : Coursera, par IBM | Obtenue le : 6 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **R Programming**, **IBM Cognos Analytics**, **Microsoft Excel** (Pivot Tables, Data Wrangling), **Data Visualization**, Analyse Statistique, Bases de Données Relationnelles.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/f7f50b959f37339f1d365ab9c48d33a5" target="_blank">Voir l'attestation</a>
-    </div>
-    
-    <div class="cert-item">
-        <div class="cert-title">Analyser vos données avec VBA</div>
-        <div class="platform">Plateforme : OpenClassrooms | Obtenue le : [Date à insérer]</div>
-        <p class="skills-list">
-            **Skills :** **VBA** (Visual Basic for Applications), Automatisation du **Reporting**, **Modélisation Statistique**, **Régression Linéaire** (Prévisions), Sécurité du Code.
-        </p>
-        <a class="attestation-link" href="https://openclassrooms.com/fr/course-certificates/8288346971" target="_blank">Voir l'attestation</a>
-    </div>
-
-    <h2>2. Supply Chain Management & Sales Operations ⚙️</h2>
-    <p>Expertise en **Supply Chain Analytics**, **Planification de la Demande** (Forecasting) et maîtrise des processus de **Sales Operations** (S&OP, CRM).</p>
-
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : Unilever Supply Chain Data Analyst</div>
-        <div class="platform">Plateforme : Coursera, par Unilever | Obtenue le : 9 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **Demand Planning**, **Forecasting**, **Supply Chain Analytics**, **Predictive Analytics**, **Process Improvement**, Real Time Data, Descriptive Analytics.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/cc3808f62a6d46e779cfaa17f2fffee4" target="_blank">Voir l'attestation</a>
-    </div>
-    
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : Salesforce Sales Operations</div>
-        <div class="platform">Plateforme : Coursera, par Salesforce & Pathstream | Obtenue le : 21 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **Sales Operations**, **CRM** (Customer Relationship Management), **Salesforce**, Order Management, Lead Management, Sales Process, Reporting & Dashboards.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/c4644a5d8ecd2ad67e4889047652d38b" target="_blank">Voir l'attestation</a>
-    </div>
-
-    <h2>3. ERP (SAP) & Systèmes d'Entreprise 💻</h2>
-    <p>Compréhension des environnements de **systèmes intégrés (ERP)**, des architectures d'entreprise et des fondations professionnelles **SAP**.</p>
-
-    <div class="cert-item">
-        <div class="cert-title">SAP Professional Fundamentals</div>
-        <div class="platform">Plateforme : Coursera, par SAP | Obtenu le : 20 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **ERP** (Enterprise Resource Planning), **SAP**, Management Consulting, Project Implementation (Waterfall), Solution Delivery, Systems Thinking.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/e43c3ff2c54ca063732851f778bea67a" target="_blank">Voir l'attestation</a>
-    </div>
-    
-    <div class="cert-item">
-        <div class="cert-title">Understanding the Enterprise Systems Environment</div>
-        <div class="platform">Plateforme : Coursera, par SAP | Obtenu le : 5 janv. 2025</div>
-        <p class="skills-list">
-            **Skills :** **Business Process Automation**, **Enterprise Architecture**, **Systems Design**, Cloud Computing, Business Analysis, Applications SAP.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/19654470f7e75c88af273c137c536859" target="_blank">Voir l'attestation</a>
-    </div>
-
-    <h2>4. Gestion de Projet & Excellence Opérationnelle ✨</h2>
-    <p>Maîtrise des méthodologies de **gestion de projet** (Agile/Scrum) et de la **gestion de programmes** (PgMP), fondamentales pour l'implémentation de solutions Supply Chain.</p>
-
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : Google Project Management</div>
-        <div class="platform">Plateforme : Coursera, par Google | Obtenue le : 6 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **Project Management Life Cycle**, **Agile**, **Scrum**, **Project Risk Management**, Stakeholder Management, Project Initiation & Planning.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/3c4fae5cc53488b1d0ada3291518adf7" target="_blank">Voir l'attestation</a>
-    </div>
-    
-    <div class="cert-item">
-        <div class="cert-title">Spécialisation : IBM Program Manager</div>
-        <div class="platform">Plateforme : Coursera, par IBM & SkillUp | Obtenue le : 6 déc. 2024</div>
-        <p class="skills-list">
-            **Skills :** **Program Management** (PgMP), **Change Management**, **Organizational Strategy**, **Earned Value Management (EVM)**, Planification Adaptive.
-        </p>
-        <a class="attestation-link" href="https://coursera.org/share/d11dcee8ca819ab84d82f54ee24c17b1" target="_blank">Voir l'attestation</a>
-    </div>
-
-    <h2>5. Environnement, Durabilité & RSE 🌱</h2>
-    <p>Actuellement en veille. Cette section sera complétée par une certification ciblée sur la *Green Supply Chain* ou les *Objectifs de Développement Durable*.</p>
-
-    <p style="text-align: center; margin-top: 50px;">
-        <a href="https://carlos25-afq.github.io/roberto-portfolio/fr.html" class="attestation-link">Retour au CV Détaillé</a> |
-        <a href="https://github.com/Carlos25-afq?tab=repositories" class="attestation-link">Explorer les Projets GitHub</a>
-    </p>
-
+            toggleButton.addEventListener('click', () => {
+                currentLang = currentLang === 'fr' ? 'en' : 'fr';
+                updateContent(currentLang);
+            });
+            
+            // Initialisation au chargement
+            updateContent(currentLang);
+        });
+    </script>
 </body>
 </html>
